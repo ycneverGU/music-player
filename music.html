@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>music player</title>
+	<link rel="stylesheet" href="music.css">
+</head>
+<body>
+	<div class="list">
+<!-- 		<div class="list-cell ${status}">
+				<span class="list-content">${SongName}</span>
+		</div>
+ -->	</div>
+ 	<div class="lyric">
+ 		
+ 	</div>
+	<div class="music-player">
+		<audio id="id-audio-player" src="music/1.mp3" controls>
+		</audio>
+	<div>
+<button id="id-button-play">play</button>
+<button id="id-button-pause">pause</button>
+<button id="id-button-prev">prev</button>
+<button id="id-button-next">next</button>
+<button id="id-button-muted">muted</button>
+<input type="range" id="id-input-volume">
+<input type="range" id="id-input-progressbar">
+	<script src="yc.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="musicplay.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="lyric.js" type="text/javascript" charset="UTF-8"></script>
+</body>
+</html>

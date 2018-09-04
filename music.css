@@ -1,0 +1,25 @@
+.playing {
+	background-color:LightBlue;
+}
+
+/*#id-audio-player {
+	display: none;
+}*/
+
+/*横条样式*/
+#id-input-progressbar {
+  -webkit-appearance: none;/*清除系统默认样式*/
+  width: 100%;
+  background: -webkit-linear-gradient(red, red) no-repeat, #ddd;/*设置左边颜色为#61bd12，右边颜色为#ddd*/
+  background-size: 0% 100%;/*设置左右宽度比例*/
+  height: 3px;/*横条的高度*/
+}
+/*拖动块的样式*/
+#id-input-progressbar::-webkit-slider-thumb {
+  -webkit-appearance: none;/*清除系统默认样式*/
+  height: 26px;/*拖动块高度*/
+  width: 26px;/*拖动块宽度*/
+  background: red;/*拖动块背景*/
+  border-radius: 50%; /*外观设置为圆形*/
+  border: solid 9px #eee; /*设置边框*/
+}
