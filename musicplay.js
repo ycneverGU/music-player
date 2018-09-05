@@ -13,7 +13,7 @@ function getCurrentSongName() {
 	var e = player.src.lastIndexOf('.')
 	currentSongName = player.src.substring(q+1, e)
 
-	return currentSongName
+	return decodeURI(currentSongName)
 }
 
 var templateTodo = function(SongName, playing) {
@@ -45,10 +45,10 @@ var loadList = function(){
 
 
 var playList =[
-	{name:'1',playing:false},
-	{name:'2',playing:false},
-	{name:'3',playing:false},
-	{name:'4',playing:false},
+	{name:'Lemon',playing:false},
+	{name:'一万次悲伤',playing:false},
+	{name:'夜空中最亮的星',playing:false},
+	{name:'烟火里的尘埃',playing:false},
 ]
 
 var list = document.querySelector(".list")
@@ -119,9 +119,13 @@ var next = function(){
 	}
 
 	var next = o + 1
+
 	if(o + 1 == playList.length ) {
+		//如果到了最后一首歌，切回第一首歌
 		next = 0
 	}
+	log('next:',next)
+	log(playList[next].name)
 	var currentSongName = playList[next].name
 
 
@@ -184,6 +188,8 @@ var initProgressbar = function(){
 	//随着音乐进行，进度条改变
 	var addonTimeupdate = function () {
 		player.ontimeupdate = function () {
+
+
 			let percent = player.currentTime / player.duration
 			progressbar.value = percent * 100
 			progressbar.style.backgroundSize = progressbar.value + '%' + ' 100%'
