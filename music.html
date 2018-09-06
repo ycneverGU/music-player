@@ -11,11 +11,12 @@
 				<span class="list-content">${SongName}</span>
 		</div>
  -->	</div>
- 	<div class="lyric">
- 		
- 	</div>
+ 	<div id="lyricWrapper">
+    		<div id="lyricContainer">
+            </div>
+    </div>
 	<div class="music-player">
-		<audio id="id-audio-player" src="music/Lemon.mp3" controls>
+		<audio id="id-audio-player" src="music/Lemon.mp3">
 		</audio>
 	<div>
 <button id="id-button-play">play</button>
@@ -23,10 +24,12 @@
 <button id="id-button-prev">prev</button>
 <button id="id-button-next">next</button>
 <button id="id-button-muted">muted</button>
+<p id="currentTime"></p>
+<p id="allTime"></p>
 <input type="range" id="id-input-volume">
 <input type="range" id="id-input-progressbar">
 	<script src="yc.js" type="text/javascript" charset="UTF-8"></script>
-	<script src="musicplay.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="lyric.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="musicplay.js" type="text/javascript" charset="UTF-8"></script>
 </body>
 </html>
