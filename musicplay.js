@@ -1,3 +1,5 @@
+//
+
 var currentTime = document.querySelector('#currentTime')
 var allTime = document.querySelector('#allTime')
 var changeButton = document.querySelector(".changeButton")
@@ -295,10 +297,14 @@ volumeIcon.addEventListener('click', function(event){
         lastVolume = volumeInput.value
         volumeInput.value = 0
         player.volume = 0
+        player.volume = volumeInput.value / 100
+        volumeInput.style.backgroundSize = volumeInput.value + '%' + ' 100%'
     } else {
         volumeInput.value = lastVolume
+        player.volume = volumeInput.value / 100
         target.classList.remove("icon-muted")
         target.classList.add("icon-volume")
+        volumeInput.style.backgroundSize = volumeInput.value + '%' + ' 100%'
     }
 
     event.cancelBubble = true
