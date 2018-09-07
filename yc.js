@@ -18,6 +18,17 @@ var toggleClass = function(element, className) {
     }
 }
 
+var toggleClass2 = function(element, className1, className2) {
+    //class开关，有就删除，没有就添加，惯用套路
+    if (element.classList.contains(className1)) {
+        element.classList.remove(className1)
+        element.classList.add(className2)
+    } else {
+        element.classList.remove(className2)
+        element.classList.add(className1)
+    }
+}
+
 var bindEvent = function(element, event, callback) {
     // element '#id' 'p' '.class'
     // event 'click' 'onmouse'

@@ -75,7 +75,6 @@ getLyric = function(url) {
         //request['overrideMimeType'] && request.overrideMimeType("text/html;charset=gb2312");
         request.onload = function() {
             that.lyric = that.parseLyric(request.response)
-            log('that.lyric:',that.lyric)
             onceLrc = that.lyric
             //display lyric to the page
             that.appendLyric(that.lyric)

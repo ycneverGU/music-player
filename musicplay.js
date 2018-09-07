@@ -1,3 +1,10 @@
+var currentTime = document.querySelector('#currentTime')
+var allTime = document.querySelector('#allTime')
+var changeButton = document.querySelector(".changeButton")
+var volumeBar = document.querySelector(".volumeBar")
+var volumeInput = document.querySelector("#id-input-volume")
+var volumeIcon = document.querySelector("#icon-volume")
+var lastVolume = volumeInput.value
 function getUrlPath() {
     //获取当前目录
     var url = document.location.toString();
@@ -43,7 +50,13 @@ var loadList = function() {
     }
 }
 
+var initcurrentTime = function () {
+	min = Math.floor(player.currentTime / 60)
+    second = Math.floor(player.currentTime % 60)
+    time = min.toString() + ':' + second.toString()
+    currentTime.innerHTML = time
 
+}
 var playList = [
     { name: 'Lemon', playing: false },
     { name: '一万次悲伤', playing: false },
@@ -76,6 +89,8 @@ var deAllPlaying = function() {
 
 var progressbar = document.querySelector("#id-input-progressbar")
 var lyricContainer = document.querySelector("#lyricContainer")
+
+initcurrentTime()
 var play = function() {
     //播放音乐
     deAllPlaying()
@@ -134,6 +149,7 @@ var next = function() {
     //切到下一首歌
     //先停止歌曲
     //切歌后进度条变为0
+    changeButton.innerHTML = '<button id="id-button-pause" class="iconfont icon-pause"></button>'
     progressbar.value = 0
     progressbar.style.backgroundSize = '0% 100%'
 
@@ -164,6 +180,10 @@ var next = function() {
 var prev = function() {
     //切到下一首歌
     //先停止歌曲
+  
+    changeButton.innerHTML = '<button id="id-button-pause" class="iconfont icon-pause"></button>'
+
+
     progressbar.value = 0
     progressbar.style.backgroundSize = '0% 100%'
     pause()
@@ -193,15 +213,119 @@ player.onended = function() {
     next()
 }
 
-var volume = document.querySelector("#id-input-volume")
+// var volumeBar = document.querySelector(".volumeBar")
+// //定义一个变量存放上一次的音量
+// var lastVolume = 0.5
 
-volume.addEventListener('mousemove', function() {
-    //无论有无静音，先打开音量
-    if (player.volume > 0) {
-        player.muted = false
+// var muted = function() {
+//     //静音开关
+//     if (player.muted) {
+//         //不静音
+//         player.muted = false
+//         volume.value = lastVolume
+//     } else {
+//         //静音同时把音量调为0
+//         player.muted = true
+//         lastVolume = volume.value
+//         volume.value = 0
+//     }
+// }
+
+// volumeBar.addEventListener('click', function(event){
+// 	var target  = event.target
+// 	log("volumeBar")
+// 	if (target.id == "id-input-volume"){
+// 		changeButton.innerHTML = '<button id="id-button-muted" class="iconfont icon-muted"></button>'
+// 		muted()
+// 	} else {
+// 		changeButton.innerHTML = '<input type="range" id="id-input-volume" class="iconfont icon-volume>'		
+// 		var volume = document.querySelector("#id-input-volume")
+// 		volume.addEventListener('mousemove', function() {
+// 		    //无论有无静音，先打开音量
+// 		    if (player.volume > 0) {
+// 		        player.muted = false
+// 		    }
+// 		    player.volume = volume.value / 100
+// 		})
+// 	}
+// })
+
+// var volumeBar = document.querySelector(".volumeBar")
+// var volumeInput = document.querySelector("#id-input-volume")
+// var volumeIcon = document.querySelector("#icon-volume")
+// var lastVolume = volumeInput.value
+// volumeIcon.addEventListener('click', function(event){
+// 	//最先显示音量图标
+// 	//点击一下显示静音图标，volumeInput.value = 0 ,  player.volume = 0
+// 	//再点一下显示回音量图标，volumeInput.value player.volume 等于之前的值
+// 	var target  = event.target
+// 	log("volumeBar，player.volume",player.volume)
+// 	log("volumeBar，volumeInput.value",volumeInput.value)
+// 	player.value = lastVolume
+// 	if (volumeInput.value > 0) {
+// 		player.muted = false
+//         volumeIcon.classList.remove("icon-muted")
+//         volumeIcon.classList.add("icon-volume")
+//     } 
+//     if (volumeInput.value == 0) {
+//     	player.muted = true
+//         // lastVolume = volumeInput.value
+//         // volumeInput.value = 0
+//         volumeIcon.classList.remove("icon-volume")
+//         volumeIcon.classList.add("icon-muted")
+//     }
+
+
+//     event.cancelBubble = true
+// })
+
+
+volumeInput.style.backgroundSize = '0% 100%'
+volumeIcon.addEventListener('click', function(event){
+	//最先显示音量图标
+	//点击一下显示静音图标，volumeInput.value = 0 ,  player.volume = 0
+	//再点一下显示回音量图标，volumeInput.value player.volume 等于之前的值
+	var target = event.target
+	log('event.target:',target)
+	// target.classList.contains
+    //class开关，有就删除，没有就添加，惯用套路
+    if (target.classList.contains("icon-volume")) {
+        target.classList.remove("icon-volume")
+        target.classList.add("icon-muted")
+        lastVolume = volumeInput.value
+        volumeInput.value = 0
+        player.volume = 0
+    } else {
+        volumeInput.value = lastVolume
+        target.classList.remove("icon-muted")
+        target.classList.add("icon-volume")
     }
-    player.volume = volume.value / 100
+
+    event.cancelBubble = true
 })
+
+
+volumeInput.addEventListener('mousemove', function() {
+	if (player.volume > 0) {
+    	player.muted = false
+	}
+	if (volumeInput.value == 0) {
+    	player.muted = true
+        volumeIcon.classList.remove("icon-volume")
+        volumeIcon.classList.add("icon-muted")
+    } else {
+		player.muted = false
+        volumeIcon.classList.remove("icon-muted")
+        volumeIcon.classList.add("icon-volume")
+    }
+	player.volume = volumeInput.value / 100
+	volumeInput.style.backgroundSize = volumeInput.value + '%' + ' 100%'
+	log("volumeInput.value", volumeInput.value)
+})
+
+
+
+
 
 
 
@@ -251,34 +375,10 @@ var initProgressbar = function() {
 
 initProgressbar()
 
-
-
-//定义一个变量存放上一次的音量
-var lastVolume = volume.value
-
-var muted = function() {
-    //静音开关
-    if (player.muted) {
-        //不静音
-        player.muted = false
-        volume.value = lastVolume
-    } else {
-        //静音同时把音量调为0
-        player.muted = true
-        lastVolume = volume.value
-        volume.value = 0
-    }
-}
-
-var currentTime = document.querySelector('#currentTime')
-var allTime = document.querySelector('#allTime')
-
 player.addEventListener('timeupdate', function () {
-	min = Math.floor(player.currentTime / 60)
-    second = Math.floor(player.currentTime % 60)
-    time = min.toString() + ':' + second.toString()
-    currentTime.innerHTML = time
+	initcurrentTime()
 })
+
 
 player.oncanplay = function() {
     min = Math.floor(player.duration / 60)
@@ -288,14 +388,27 @@ player.oncanplay = function() {
 }
 
 
-var playbutton = bindEvent("#id-button-play", "click", play)
 
-var pausebutton = bindEvent("#id-button-pause", "click", pause)
 
-var nextSongButton = bindEvent("#id-button-next", "click", next)
+changeButton.addEventListener('click', function(event){
+	var target  = event.target
+	log("changeButton")
+	if (target.id == "id-button-play"){
+		changeButton.innerHTML = '<button id="id-button-pause" class="iconfont icon-pause"></button>'
+		// bindEvent("#id-button-pause", "click", play)
+		play()
+	} else {
+		changeButton.innerHTML = '<button id="id-button-play" class="iconfont icon-play"></button>'		
+	 	// bindEvent("#id-button-play", "click", pause)
+	 	pause()
+	}
+})
+
+
+
+var nextButton = bindEvent("#id-button-next", "click", next)
 
 var prevButton = bindEvent("#id-button-prev", "click", prev)
 
-var mutedButton = bindEvent("#id-button-muted", "click", muted)
 
 loadList()

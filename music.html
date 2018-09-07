@@ -1,35 +1,43 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
+
 <head>
-	<meta charset="UTF-8">
-	<title>music player</title>
-	<link rel="stylesheet" href="music.css">
+    <meta charset="UTF-8">
+    <title>music player</title>
+    <link rel="stylesheet" href="music.css">
+    <link rel="stylesheet" type="text/css" href="font/iconfont.css">
 </head>
+
 <body>
-	<div class="list">
-<!-- 		<div class="list-cell ${status}">
+    <div class="list">
+        <!-- 		<div class="list-cell ${status}">
 				<span class="list-content">${SongName}</span>
 		</div>
- -->	</div>
- 	<div id="lyricWrapper">
-    		<div id="lyricContainer">
-            </div>
+ --></div>
+    <div id="lyricWrapper">
+        <div id="lyricContainer">
+        </div>
     </div>
-	<div class="music-player">
-		<audio id="id-audio-player" src="music/Lemon.mp3">
-		</audio>
-	<div>
-<button id="id-button-play">play</button>
-<button id="id-button-pause">pause</button>
-<button id="id-button-prev">prev</button>
-<button id="id-button-next">next</button>
-<button id="id-button-muted">muted</button>
-<p id="currentTime"></p>
-<p id="allTime"></p>
-<input type="range" id="id-input-volume">
-<input type="range" id="id-input-progressbar">
-	<script src="yc.js" type="text/javascript" charset="UTF-8"></script>
-	<script src="lyric.js" type="text/javascript" charset="UTF-8"></script>
-	<script src="musicplay.js" type="text/javascript" charset="UTF-8"></script>
+    <div class="music-player">
+        <audio id="id-audio-player" src="music/Lemon.mp3"></audio>
+    <div>
+            <div class="playBar">
+                <button id="id-button-prev"><i class="iconfont icon-prev"></i></button>
+                <div class="changeButton">
+                    <button id="id-button-play" class="iconfont icon-play"></button>
+                </div>
+                <button id="id-button-next"><i class="iconfont icon-next"></i></button>
+                <span id="currentTime"></span>
+                <input type="range" id="id-input-progressbar">
+                <span id="allTime"></span>
+            	<div class="volumeBar">
+            		<i id="icon-volume" class="iconfont icon-volume"></i>	
+                	<input type="range" id="id-input-volume">
+            	</div>
+            </div>
+            <script src="yc.js" type="text/javascript" charset="UTF-8"></script>
+            <script src="lyric.js" type="text/javascript" charset="UTF-8"></script>
+            <script src="musicplay.js" type="text/javascript" charset="UTF-8"></script>
 </body>
+
 </html>
