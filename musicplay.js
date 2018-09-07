@@ -215,71 +215,7 @@ player.onended = function() {
     next()
 }
 
-// var volumeBar = document.querySelector(".volumeBar")
-// //定义一个变量存放上一次的音量
-// var lastVolume = 0.5
 
-// var muted = function() {
-//     //静音开关
-//     if (player.muted) {
-//         //不静音
-//         player.muted = false
-//         volume.value = lastVolume
-//     } else {
-//         //静音同时把音量调为0
-//         player.muted = true
-//         lastVolume = volume.value
-//         volume.value = 0
-//     }
-// }
-
-// volumeBar.addEventListener('click', function(event){
-// 	var target  = event.target
-// 	log("volumeBar")
-// 	if (target.id == "id-input-volume"){
-// 		changeButton.innerHTML = '<button id="id-button-muted" class="iconfont icon-muted"></button>'
-// 		muted()
-// 	} else {
-// 		changeButton.innerHTML = '<input type="range" id="id-input-volume" class="iconfont icon-volume>'		
-// 		var volume = document.querySelector("#id-input-volume")
-// 		volume.addEventListener('mousemove', function() {
-// 		    //无论有无静音，先打开音量
-// 		    if (player.volume > 0) {
-// 		        player.muted = false
-// 		    }
-// 		    player.volume = volume.value / 100
-// 		})
-// 	}
-// })
-
-// var volumeBar = document.querySelector(".volumeBar")
-// var volumeInput = document.querySelector("#id-input-volume")
-// var volumeIcon = document.querySelector("#icon-volume")
-// var lastVolume = volumeInput.value
-// volumeIcon.addEventListener('click', function(event){
-// 	//最先显示音量图标
-// 	//点击一下显示静音图标，volumeInput.value = 0 ,  player.volume = 0
-// 	//再点一下显示回音量图标，volumeInput.value player.volume 等于之前的值
-// 	var target  = event.target
-// 	log("volumeBar，player.volume",player.volume)
-// 	log("volumeBar，volumeInput.value",volumeInput.value)
-// 	player.value = lastVolume
-// 	if (volumeInput.value > 0) {
-// 		player.muted = false
-//         volumeIcon.classList.remove("icon-muted")
-//         volumeIcon.classList.add("icon-volume")
-//     } 
-//     if (volumeInput.value == 0) {
-//     	player.muted = true
-//         // lastVolume = volumeInput.value
-//         // volumeInput.value = 0
-//         volumeIcon.classList.remove("icon-volume")
-//         volumeIcon.classList.add("icon-muted")
-//     }
-
-
-//     event.cancelBubble = true
-// })
 
 
 volumeInput.style.backgroundSize = '0% 100%'
