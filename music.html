@@ -9,32 +9,38 @@
 </head>
 
 <body>
-    <div class="list">
-        <!-- 		<div class="list-cell ${status}">
-				<span class="list-content">${SongName}</span>
-		</div>
- --></div>
-    <div id="lyricWrapper">
-        <div id="lyricContainer">
+    <div class="bg">
+        <div class="list">
+            <!-- 		<div class="list-cell ${status}">
+    				<span class="list-content">${SongName}</span>
+    		</div>
+     --></div>
+        <div id="lyricWrapper">
+            <div id="lyricContainer">
         </div>
-    </div>
-    <div class="music-player">
-        <audio id="id-audio-player" src="music/Lemon.mp3"></audio>
-    <div>
-            <div class="playBar">
+        </div>
+        <div class="music-player">
+            <audio id="id-audio-player" src="music/Lemon.mp3"></audio>
+        <div>
+        <div class="playBar">
+            <div id="left">
                 <button id="id-button-prev"><i class="iconfont icon-prev"></i></button>
                 <div class="changeButton">
                     <button id="id-button-play" class="iconfont icon-play"></button>
                 </div>
                 <button id="id-button-next"><i class="iconfont icon-next"></i></button>
-                <span id="currentTime"></span>
-                <input type="range" id="id-input-progressbar">
-                <span id="allTime"></span>
-            	<div class="volumeBar">
-            		<i id="icon-volume" class="iconfont icon-volume"></i>	
-                	<input type="range" id="id-input-volume">
-            	</div>
             </div>
+            <div id="progressbar">
+                <span id="currentTime" style="vertical-align: middle;"></span>
+                <input type="range" id="id-input-progressbar">
+                <span id="allTime" style="vertical-align: middle;"></span>
+            </div>
+        	<div class="volumeBar">
+        		<i id="icon-volume" class="iconfont icon-volume"></i>	
+            	<input type="range" id="id-input-volume">
+        	</div>
+        </div>
+    </div>
             <script src="yc.js" type="text/javascript" charset="UTF-8"></script>
             <script src="lyric.js" type="text/javascript" charset="UTF-8"></script>
             <script src="musicplay.js" type="text/javascript" charset="UTF-8"></script>

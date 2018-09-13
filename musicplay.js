@@ -6,6 +6,7 @@ var changeButton = document.querySelector(".changeButton")
 var volumeBar = document.querySelector(".volumeBar")
 var volumeInput = document.querySelector("#id-input-volume")
 var volumeIcon = document.querySelector("#icon-volume")
+var list = document.querySelector(".list")
 var lastVolume = volumeInput.value
 function getUrlPath() {
     //获取当前目录
@@ -31,18 +32,17 @@ var templateTodo = function(SongName, playing) {
         status = "playing"
     }
     var t = `
-			<div class="list-cell ${status}">
-				<span class="list-content">${SongName}</span>
-			</div>
+			<div class="list-cell ${status}">${SongName}</div>
 		`
     return t
 }
 
+
 var insertMusic = function(songName, playing) {
-    var list = document.querySelector(".list")
+    var l = document.querySelector(".list")
     var t = templateTodo(songName, playing)
 
-    list.insertAdjacentHTML('beforeend', t)
+    l.insertAdjacentHTML('beforeend', t)
 }
 
 var loadList = function() {
@@ -63,18 +63,9 @@ var playList = [
     { name: 'Lemon', playing: false },
     { name: '一万次悲伤', playing: false },
     { name: '夜空中最亮的星', playing: false },
-    { name: '烟火里的尘埃', playing: false },
+    { name: '大鱼', playing: false },
 ]
 
-var list = document.querySelector(".list")
-
-list.addEventListener('click', function(event) {
-    var target = event.target
-    if (target.classList.contains('list-cell')) {
-        // 给 list-cell 开关一个状态 class
-        toggleClass(target, 'playing')
-    }
-})
 
 //切换到歌曲所在目录
 var url = getUrlPath() + '/music/'
@@ -97,6 +88,7 @@ var play = function() {
     //播放音乐
     deAllPlaying()
     addCurrentPlaying()
+    log('done play')
     //初始化时间
     // initALLTime()
     //处理url
@@ -144,6 +136,9 @@ var addCurrentPlaying = function() {
     }
     //给这第 o 首歌加上 playing class
     list.children[o].classList.add('playing')
+    log(list.children[o].classList)
+    log("addCurrentPlaying")
+
 }
 
 
@@ -162,7 +157,7 @@ var next = function() {
             var o = i
         }
     }
-
+    //让next为下一首歌，即o+1
     var next = o + 1
 
     if (o + 1 == playList.length) {
@@ -218,13 +213,12 @@ player.onended = function() {
 
 
 
-volumeInput.style.backgroundSize = '0% 100%'
+volumeInput.style.backgroundSize = '50% 100%'
 volumeIcon.addEventListener('click', function(event){
 	//最先显示音量图标
 	//点击一下显示静音图标，volumeInput.value = 0 ,  player.volume = 0
 	//再点一下显示回音量图标，volumeInput.value player.volume 等于之前的值
 	var target = event.target
-	log('event.target:',target)
 	// target.classList.contains
     //class开关，有就删除，没有就添加，惯用套路
     if (target.classList.contains("icon-volume")) {
@@ -262,7 +256,6 @@ volumeInput.addEventListener('mousemove', function() {
     }
 	player.volume = volumeInput.value / 100
 	volumeInput.style.backgroundSize = volumeInput.value + '%' + ' 100%'
-	log("volumeInput.value", volumeInput.value)
 })
 
 
@@ -334,7 +327,6 @@ player.oncanplay = function() {
 
 changeButton.addEventListener('click', function(event){
 	var target  = event.target
-	log("changeButton")
 	if (target.id == "id-button-play"){
 		changeButton.innerHTML = '<button id="id-button-pause" class="iconfont icon-pause"></button>'
 		// bindEvent("#id-button-pause", "click", play)
@@ -346,6 +338,13 @@ changeButton.addEventListener('click', function(event){
 	}
 })
 
+list.addEventListener('mouseup',function (event) {
+    //播放被点击的音乐
+    tag = event.target
+    player.src = './music/' + tag.innerHTML + '.mp3'
+    play()
+    changeButton.innerHTML = '<button id="id-button-pause" class="iconfont icon-pause"></button>'
+})
 
 
 var nextButton = bindEvent("#id-button-next", "click", next)
